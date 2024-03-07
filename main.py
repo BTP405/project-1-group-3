@@ -1,7 +1,45 @@
-from customer import Customer
+from booking import Booking
+ 
+if __name__ == "__main__": 
+    choice = ''
+    while True:
+        while choice.upper() != 'N' and choice.upper() != 'NO' and choice.upper() != 'Y' and choice.upper() != 'YES':
+            choice = input("Do you want to start booking? (y/n): ")
 
-customer1 = Customer("d", "sdfasdf2@gmail.com", str(2343344342))
-customer1 = Customer("dsfsdd", "jjkfvnkfd@gmail.com", str(2343874342))
-print(customer1)
+        if choice.upper() == 'N' or choice.upper() == 'NO': 
+            exit()
+        else:
+            print("Program start here")
+            choice = ''
+        
+        
+        
+# cus = Customer(1, "Hoang", "phanthanh@gmail.com", 4324343243)
+# print(cus)
 
-print(Customer.NoOfCustomer)
+# connection = sqlite3.connect("./nailbar.db")
+
+# cursor = connection.cursor()
+
+# cursor.execute("""
+#     SELECT * FROM services
+# """)
+
+# rows = cursor.fetchall()
+
+# services = []
+# for row in rows:
+#     services.append(Service(row[0], row[1], row[3], row[4], row[2])) # Positions of attributes in services (type, name, desc, duration, price)
+    
+# for service in services:
+#     print(service)
+
+# technicians = []
+# for row in rows:
+#     technicians.append(Technician(row[0], row[1], row[2], row[3], row[4]))
+    
+# for technician in technicians: 
+#     print(technician)
+
+# connection.commit()
+# connection.close()
