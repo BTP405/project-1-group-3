@@ -1,4 +1,13 @@
-from booking import Booking
+from service import Service 
+
+def displayServiceList(): 
+    services = Service.findAll()
+    
+    for service in services: 
+        print(service)
+
+def run(): 
+    displayServiceList()
  
 if __name__ == "__main__": 
     choice = ''
@@ -9,7 +18,7 @@ if __name__ == "__main__":
         if choice.upper() == 'N' or choice.upper() == 'NO': 
             exit()
         else:
-            print("Program start here")
+            run()
             choice = ''
         
         
