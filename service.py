@@ -22,7 +22,33 @@ class Service:
     def __repr__(self): 
         return f"{self.__class__.__name__}(_id: {self.__id},type: {self.__type}, name: {self.__name}, description: {self.__description}, duration: {self.__duration}, price: {self.__price})"
 
-    # Retrieve data from service
+    @property 
+    def id(self): 
+        return self.__id
+    
+    @property 
+    def type(self): 
+        if self.__type == "Hand": return "H"
+        elif self.__type == "Feet": return "F"
+        else: return "R"
+    
+    @property 
+    def name(self): 
+        return self.__name
+    
+    @property 
+    def duration(self): 
+        return f"{self.__duration} mins"
+    
+    @property 
+    def description(self): 
+        return self.__description
+    
+    @property 
+    def price(self): 
+        return self.__price
+    
+    # Find all values in services database
     @classmethod
     def findAll(self): 
         connection = sqlite3.connect("./nailbar.db")
@@ -42,6 +68,7 @@ class Service:
 
         return services
     
+    # Find by Id in services database
     @classmethod
     def findById(self, id): 
         connection = sqlite3.connect("./nailbar.db")

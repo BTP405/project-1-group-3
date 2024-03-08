@@ -1,4 +1,5 @@
 from person import Person
+import sqlite3
 
 class Technician(Person): 
     # initialize an instance
@@ -15,3 +16,46 @@ class Technician(Person):
     def __repr__(self): 
         return f"{self.__class__.__name__}(_id: {self.__id}, name: {self.name}, phone_number {self.phone_number}, specialization: {self.__specialization})"
     
+    @property
+    def id(self): 
+        return self.__id
+    
+    @property
+    def specialization(self): 
+        return f"{self.__specialization[0]}"
+    
+    @classmethod
+    def findAll(self): 
+        connection = sqlite3.connect("./nailbar.db")
+
+        cursor = connection.cursor()
+
+        cursor.execute("""
+            SELECT * FROM technicians
+        """)
+        
+        rows = cursor.fetchall()
+
+        technicians = [Technician(row[0], row[1], row[2], row[3], row[4]) for row in rows]
+
+        connection.commit()
+        connection.close()
+
+        return technicians
+    
+    # Find by Id in services database
+    @classmethod
+    def findById(self, id): 
+        connection = sqlite3.connect("./nailbar.db")
+        cursor = connection.cursor()
+        
+        cursor.execute(f"""
+            SELECT * FROM technicians
+            WHERE id = {id}
+        """)
+        row = cursor.fetchone()
+        
+        connection.commit()
+        connection.close()
+
+        return Technician(row[0], row[1], row[2], row[3], row[4])
