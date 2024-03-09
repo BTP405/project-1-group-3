@@ -12,7 +12,41 @@
     - Examples: Include examples or code snippets to demonstrate how to use your project.
     - Configuration: Explain any configuration options or settings users might need to know about.
 ## 4. Features
-    - List of Features: Outline the main features and functionalities of your project.
+### 
+Classes : 
+1. Person
+   This is an abstract class representing a Person
+   Attributes :
+   - name : string
+    - email: string
+    - phone number : int
+3. Technician
+   This class is a child class of Person.
+   Attribute :
+   - id: int
+   - specialization : list - representing the speacializations for each technician, for example ['Nail Care', 'Acrylic Nails'])
+     Property :
+  - id - this a query to return the id of technitican
+  - 
+4. Customer
+   This class is a child class of Person
+   Attribute :
+   - id : int
+   Instance Method :
+   - update(self, name, email, phone_number) : update the information of a customer.
+ * id for customer and technitian are of different categories, so we do not have it as an attribute in Person.
+5. Appointment
+   This class represents an appointment record.
+   - id : int
+   - technician : Technician
+   - customer : Customer
+   - service : []
+   - datetime : datetime
+   - isDone : bool
+Methods :
+
+###
+    
 ## 5. Contributing
     - Guidelines: Explain how others can contribute to your project, including information on submitting bug reports, feature requests, or code contributions.
     - Code Style: If applicable, provide guidelines or references to your code style.
