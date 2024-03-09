@@ -1,11 +1,14 @@
 from person import Person
 import sqlite3
+import os
+from termcolor import colored
 
 class Technician(Person): 
     # initialize an instance
     def __init__(self, id: int, name: str, email: str, phone_number: int, specialization: str):
         assert id > 0, f"ID {id} must be more than 0" # error if the value is lower than 1
-        for special in specialization:
+        # validate the specialization's name
+        for special in specialization: 
             assert isinstance(special, str) and len(special) > 0, f"Special {special} length must be more than 0" # error if the value is not a string and the len is lower than 1
         
         super().__init__(name, email, str(phone_number)) 
@@ -59,3 +62,19 @@ class Technician(Person):
         connection.close()
 
         return Technician(row[0], row[1], row[2], row[3], row[4])
+    
+    @classmethod
+    def printTechnician(self, selectedTechnician):
+        os.system('cls||clear')
+        technicians = Technician.findAll()
+        print("******************************************************************")
+        print("*                                                                *")
+        for technician in technicians:
+            if technician.id == selectedTechnician:
+                print(
+                    "* ", colored(f"{technician.id:>2}. {technician.name:<15} | {technician.specialization:<38}", color="green"), " *")
+            else:
+                print(
+                    f"* {technician.id:>3}. {technician.name:<15} | {technician.specialization:<38}  *")
+        print("*                                                                *")
+        print("******************************************************************\n")

@@ -1,4 +1,6 @@
 import sqlite3
+import os
+from termcolor import colored
 
 class Service:  
     # initialize an instance
@@ -84,3 +86,23 @@ class Service:
         connection.close()
 
         return Service(row[0], row[1], row[2], row[4], row[5], row[2])
+    
+    # print service menu
+    @classmethod
+    def printServices(self, selectedServices):
+        os.system('cls||clear')
+        services = Service.findAll()
+        print("******************************************************************")
+        print("*                                                                *")
+        print("*    ID  Name                              Duration    Price     *")
+        for service in services:
+            if service.id in selectedServices:
+                print(
+                    "* ", colored(f"{service.id:>3}. {service.type} | {service.name:<30} {service.duration:<11} ${service.price:<6}", color="green"), "  *")
+            else:
+                print(
+                    f"*  {service.id:>3}. {service.type} | {service.name:<30} {service.duration:<11} ${service.price:<6}   *")
+        print("*                                                                *")
+        print("*              H: Hand, F: Fee, R: Reflexology                   *")
+        print("*                                                                *")
+        print("******************************************************************\n")

@@ -1,23 +1,20 @@
 from technician import Technician
 from customer import Customer
 from service import Service
-
+import sqlite3
+import os
 
 class Appointment: 
-    NoOfAppointment = 0 
-    
     # initialize an instance
-    def __init__(self, technician: Technician, customer: Customer, dateTime, services = [], isDone = False): 
-        Appointment.NoOfAppointment += 1
-        
-        self.__id = Appointment.NoOfAppointment
-        self.__technician = technician
-        self.__customer = customer
+    def __init__(self, technicianId: int, customerId: int, dateTime, services = []): 
+        self.__id = Appointment.countAll() + 1
+        self.__technician = technicianId
+        self.__customer = customerId
         self.__services = services
         self.__dateTime = dateTime
-        self.__isDone = isDone
         
-        
+        # for service in services:
+        Appointment.insertOne(self.__id, technicianId, customerId, dateTime, services)
         
     # define the representation of an instance, display it as an receipt 
     def __repr__(self): 
@@ -26,48 +23,81 @@ class Appointment:
             printServices += str(service) + "\n"
         return f"Receipt:\nAppointment ID: {self.__id}\nTime: {self.__dateTime}\n{self.__technician}\n{self.__customer}\n{printServices}"
         
-
-# import sqlite3
-# import datetime
-# cus = Customer(1, "Hoang", "phanthanh@gmail.com", 4324343243)
-# # print(cus)
-
-# connection = sqlite3.connect("./nailbar.db")
-
-# cursor = connection.cursor()
-
-# cursor.execute("""
-#     SELECT * FROM technicians
-#     WHERE id = 4
-# """)
-
-# row = cursor.fetchone()
-
-# technician = Technician(row[0], row[1], row[2], row[3], row[4])
-# # print(technician)
-
-# cursor.execute("""
-#     SELECT * FROM services
-#     WHERE type = "Reflexology"
-# """)
-
-# rows = cursor.fetchall()
-
-# services = [Service(row[0], row[1], row[2], row[4], row[5], row[2]) for row in rows]
+    @classmethod
+    def printAppointment(self, customer, technicianId, serviceIds, dateTime):
+        technician = Technician.findById(technicianId)
+        services = [Service.findById(id) for id in serviceIds]
+        os.system('cls||clear')
+        print("******************************************************************")
+        print("*                                                                *")
+        print("*  Your information:                                             *")
+        print(
+            f"*    Name: {customer.name:<15}                                       *")
+        print(f"*    Email: {customer.email:<30}                       *")
+        print(
+            f"*    Phone number: {customer.phone_number:<15}                               *")
+        print("*                                                                *")
+        print("*  Your booking information:                                     *")
+        print(f"*    Date and Time: {dateTime:<15}                              *")
+        print(
+            f"*    Technician: {technician.name:<15}                                 *")
+        print("*    Service:                                                    *")
+        subtotal = 0
+        for service in services:
+            subtotal += float(service.price)
+            print(
+                f"*      {service.type} | {service.name:<30} {service.duration:<11} ${service.price:<6}    *")
+        print(f"*                                        Subtotal:    ${subtotal:<5}     *")
+        print(f"*                                             Tax:    ${str(round(subtotal*0.13, 2)):<5}     *")
+        print(f"*                                       Total Due:    ${str(round(subtotal*1.13, 2)):<7}   *")
+        print("*                                                                *")
+        print("******************************************************************\n")
+        
+    @classmethod
+    def insertOne(self, id, technicianId, customerId, dateTime, services): 
+        connection = sqlite3.connect("./nailbar.db")
+        cursor = connection.cursor()
+        
+        cursor.execute("""
+            CREATE TABLE IF NOT EXISTS appointments(
+                id INT PRIMARY KEY,
+                technicianId INT,
+                customerId INT, 
+                dateTime TEXT, 
+                services TEXT 
+            )               
+        """)
+        
+        cursor.execute(f"""
+            INSERT INTO appointments VALUES
+            ({id}, {technicianId}, {customerId}, "{dateTime}", "{services}")
+        """)
+        
+        connection.commit()
+        connection.close()
     
-# # for service in services:
-# #     print(service)
+    @classmethod
+    def countAll(self): 
+        connection = sqlite3.connect("./nailbar.db")
 
-# connection.commit()
-# connection.close()
-
-# currTime = datetime.datetime.now()
-# # print(currTime.strftime("%Y-%m-%d"))
-# # print(currTime.strftime("%X %p"))
-
-# app = Appointment(1, technician, cus, currTime.strftime("%Y-%m-%d"), currTime.strftime("%X %p"), False, services)
-# print(app)
-
-# # Parsing the datetime string to a datetime object
-# # datetime_obj = datetime.datetime.strptime("2014-05-03", "%Y-%m-%d")
-# # print(datetime_obj.date())
+        cursor = connection.cursor()
+        
+        cursor.execute("""
+            CREATE TABLE IF NOT EXISTS appointments(
+                id INT PRIMARY KEY,
+                technicianId INT,
+                customerId INT, 
+                dateTime TEXT, 
+                services TEXT 
+            )               
+        """)
+        
+        cursor.execute(f"""
+            SELECT COUNT(*) FROM appointments;
+        """)
+        
+        row = cursor.fetchone()
+        connection.commit()
+        connection.close()
+        
+        return row[0]
