@@ -37,7 +37,7 @@ Classes :
    - specialization : list - representing the speacializations for each technician, for example ['Nail Care', 'Acrylic Nails'])
      Property :
   - id - this a query to return the id of technitican
-  - 
+  - name
 4. Customer
    This class is a child class of Person
    Attribute :
