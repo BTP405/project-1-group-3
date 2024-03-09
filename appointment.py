@@ -7,11 +7,11 @@ import os
 class Appointment: 
     # initialize an instance
     def __init__(self, technicianId: int, customerId: int, dateTime, services = []): 
-        self.__id = Appointment.countAll() + 1
-        self.__technician = technicianId
-        self.__customer = customerId
-        self.__services = services
-        self.__dateTime = dateTime
+        self.__id = Appointment.countAll() + 1 # the id of the appointment in the database (priv)
+        self.__technician = technicianId # the technician id (priv)
+        self.__customer = customerId # the customer id (priv)
+        self.__services = services # the list of the services' id (priv)
+        self.__dateTime = dateTime # the string of date and time
         
         # for service in services:
         Appointment.insertOne(self.__id, technicianId, customerId, dateTime, services)
@@ -22,7 +22,8 @@ class Appointment:
         for service in self.__services: 
             printServices += str(service) + "\n"
         return f"Receipt:\nAppointment ID: {self.__id}\nTime: {self.__dateTime}\n{self.__technician}\n{self.__customer}\n{printServices}"
-        
+    
+    # print the appointment information
     @classmethod
     def printAppointment(self, customer, technicianId, serviceIds, dateTime):
         technician = Technician.findById(technicianId)
@@ -52,7 +53,8 @@ class Appointment:
         print(f"*                                       Total Due:    ${str(round(subtotal*1.13, 2)):<7}   *")
         print("*                                                                *")
         print("******************************************************************\n")
-        
+    
+    # insert an appointment to the database
     @classmethod
     def insertOne(self, id, technicianId, customerId, dateTime, services): 
         connection = sqlite3.connect("./nailbar.db")
@@ -76,6 +78,7 @@ class Appointment:
         connection.commit()
         connection.close()
     
+    # return the number of rows in the Appointment collection
     @classmethod
     def countAll(self): 
         connection = sqlite3.connect("./nailbar.db")

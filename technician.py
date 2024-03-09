@@ -12,21 +12,24 @@ class Technician(Person):
             assert isinstance(special, str) and len(special) > 0, f"Special {special} length must be more than 0" # error if the value is not a string and the len is lower than 1
         
         super().__init__(name, email, str(phone_number)) 
-        self.__id = id # the id of technician
-        self.__specialization =  [special.strip() for special in specialization.split(',')] # the array of specialization, view the "technicians" file
+        self.__id = id # the id of technician (priv)
+        self.__specialization =  [special.strip() for special in specialization.split(',')] # the array of specialization (priv), view the "technicians" file
     
     # define the representation of an instance. Ex: Technician(_id: 4, name: Pat Kim, phone_number 1234567893, specialization: ['Nail Care', 'Acrylic Nails'])
     def __repr__(self): 
         return f"{self.__class__.__name__}(_id: {self.__id}, name: {self.name}, phone_number {self.phone_number}, specialization: {self.__specialization})"
     
+    # return the id of a technician
     @property
     def id(self): 
         return self.__id
     
+    # return a string representing the list of a technician's specialization
     @property
     def specialization(self): 
         return f"{self.__specialization[0]}"
     
+    # return all the technician objects in the database
     @classmethod
     def findAll(self): 
         connection = sqlite3.connect("./nailbar.db")
@@ -46,7 +49,7 @@ class Technician(Person):
 
         return technicians
     
-    # Find by Id in services database
+    # return a technician object in the database by id
     @classmethod
     def findById(self, id): 
         connection = sqlite3.connect("./nailbar.db")
@@ -63,6 +66,7 @@ class Technician(Person):
 
         return Technician(row[0], row[1], row[2], row[3], row[4])
     
+    # print the information of technicians
     @classmethod
     def printTechnician(self, selectedTechnician):
         os.system('cls||clear')

@@ -5,7 +5,7 @@ class Customer(Person):
     # initialize an instance
     def __init__(self, name: str, email: str, phone_number: int): 
         # assign the values to the instance's attributes
-        self.id = Customer.countAll() + 1
+        self.id = Customer.countAll() + 1 # the id of the Customer in the database (priv)
         super().__init__(name, email, str(phone_number))
         Customer.insertOne(self.id, self.name, self.email, self.phone_number)
     
@@ -44,7 +44,8 @@ class Customer(Person):
         
         connection.commit()
         connection.close()
-        
+    
+    # return the number of rows in the Customer collection
     @classmethod
     def countAll(self): 
         connection = sqlite3.connect("./nailbar.db")
@@ -70,6 +71,7 @@ class Customer(Person):
         
         return row[0]
 
+    # update a customer information by ID
     @classmethod
     def updateByID(self, id, name, email, phone_number): 
         connection = sqlite3.connect("./nailbar.db")
