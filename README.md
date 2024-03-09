@@ -56,13 +56,21 @@ Classes :
 Methods :
 
 ## 5. Contributing
-    - Guidelines: Explain how others can contribute to your project, including information on submitting bug reports, feature requests, or code contributions.
-        + We use the branch in github to contribute to our project. To use branch for commiting the project, 
+    - Guidelines: 
+        + We use the branch in github to contribute to our project. To use branch for commiting the project, we cloned the repository to the local folder, and then creates a personal branch by Visual Studio. After pushing the code to the main file, we will verify before merging the code to the main branch
     
-    - Code Style: If applicable, provide guidelines or references to your code style.
+    - Code Style: 
+        + We follow all the requirement in the project instruction, including OOP and PEP8.
+        
 ## 6. Credits
-    - Authors: List the authors or contributors of the project.
-    - Acknowledgments: Mention any individuals or resources that helped inspire or support your project.
+    - Authors: 
+        + Hoang Phan - 101662229
+        + Arlene Pham - 11079722
+        + Alyssa Maria Gamelo - 064540040
+        
+    - Acknowledgments: 
+        + Youtube: https://www.youtube.com/watch?v=jhtbhSpV5YA&t=473s
+        
 ## 7. License
     - License Information: Specify the license under which your project is distributed.
 ## 8. Additional Sections (Optional)
