@@ -1,16 +1,26 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/545oUMxH)
-
-### Please use the following template to add a ReadMe for your repo.
-
 ## 1. Project Title and Description
     - Title: Nail Salon Booking System
     - Description: This project is a nail salon booking system. The purpose of this application is for clients to securely book their appointments with the salon. This booking system is very intuitive and easy to understand. Users are able to fill in their personal information and select their nail technician, appointment date and time and the type of nail service. This application is also capable of updating the information of the customer.
 ## 2. Installation
-    - Dependencies: List any dependencies or prerequisites required to use your project.
-    - Installation Instructions: Provide step-by-step instructions on how to install and set up your project.
+    - Dependencies: 
+        + termcolor
+        
+    - Installation Instructions: 
+        + Clone the repository to your local folder. 
+        + Check if the "nailbar.db" exists. If it doesn't exist, compile to files in the 'seeds' folder. 
+        + Compile the main.py file to start the program.
+        
 ## 3. Usage
-    - Examples: Include examples or code snippets to demonstrate how to use your project.
-    - Configuration: Explain any configuration options or settings users might need to know about.
+    - Examples: 
+        + At the beginning, you have to fill your personal information (name, email, and phone number) to start the program.
+        + Then, a list of options for booking an appointment will be displayed. 
+        + To confirm the booking, select option 5 to view the appointment information and confirm. 
+        + NOTE: You must complete selecting the services, technician, and date and time. If any field is empty, the program will be terminated. 
+    
+    - Configuration: 
+        + Create Services collection with values by running this command: python ./seeds/services.py
+        + Create Technicians collection with values by running this command: python ./seeds/technicians.py
+        
 ## 4. Features
 ### 
 Classes : 
@@ -45,10 +55,10 @@ Classes :
    - isDone : bool
 Methods :
 
-###
-    
 ## 5. Contributing
     - Guidelines: Explain how others can contribute to your project, including information on submitting bug reports, feature requests, or code contributions.
+        + We use the branch in github to contribute to our project. To use branch for commiting the project, 
+    
     - Code Style: If applicable, provide guidelines or references to your code style.
 ## 6. Credits
     - Authors: List the authors or contributors of the project.
