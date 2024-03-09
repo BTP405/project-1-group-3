@@ -65,7 +65,7 @@ Methods :
 ## 6. Credits
     - Authors: 
         + Hoang Phan - 101662229
-        + Arlene Pham - 11079722
+        + Arlene Pham - 11079222
         + Alyssa Maria Gamelo - 064540040
         
     - Acknowledgments: 
